@@ -1,8 +1,11 @@
 (function () {
 
   // Create a client instance
-  let client = new Paho.MQTT.Client("localhost", Number(3000), "paho_demo_client_id")
-  client.startTrace()
+  let client = new Paho.MQTT.Client(
+    "localhost",          // host
+    Number(3000),         // port
+    "paho_demo_client_id" // client id
+  )
 
   // set callback handlers
   client.onConnectionLost = onConnectionLost
@@ -193,7 +196,16 @@
 
   setStatus = {
     "status/403539": function(status) {
-      $("#statusText").text(status)
+      if (status.toLowerCase() === "online") {
+        $("#statusText").html("<i class='fa fa-bolt text-success'></i> Online")
+      } 
+      else if (status.toLowerCase() === "offline") {
+        $("#statusText").html("<i class='fa fa-times-circle text-danger'></i> Offline")
+      }
+      else {
+        $("#statusText").text(status)
+      }
+      
     }
   }
 })()

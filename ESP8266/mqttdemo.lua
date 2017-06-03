@@ -77,7 +77,7 @@ print("Setting up...")
 timer = tmr.create()
 timer:register(5000, tmr.ALARM_AUTO, new_reading)
 
-client = mqtt.Client(node.chipid(), 30)
+client = mqtt.Client(node.chipid(), 10)
 
 bme280.init(1,2) -- SDA, SLC
 

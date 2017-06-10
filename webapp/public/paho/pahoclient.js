@@ -4,7 +4,7 @@
   let client = new Paho.MQTT.Client(
     "localhost",          // host
     Number(3000),         // port
-    "paho_demo_client_id" // client id
+    "1138"                // client id, must be unique
   )
 
   // set callback handlers
@@ -13,8 +13,8 @@
   client.onMessageDelivered = onMessageDelivered
 
   // Last Will and Testament message
-  let willMessage = new Paho.MQTT.Message("Elvis has left the building")
-  willMessage.destinationName = "disconnects"
+  let willMessage = new Paho.MQTT.Message("Offline")
+  willMessage.destinationName = "status/1138"
 
 
   // connect the client
@@ -31,11 +31,12 @@
     // Once a connection has been made, make a subscription and send a message.
     toastr.success("onConnect")
     client.subscribe("general")
+    client.subscribe("status/+")
+    client.subscribe("readings/+")
+
     //client.subscribe("temperature/+")
     //client.subscribe("pressure/+")
     //client.subscribe("humidity/+")
-    client.subscribe("status/+")
-    client.subscribe("readings/+")
   }
 
   // called when the client connect fails
@@ -52,6 +53,11 @@
   function onMessageArrived(message) {
     toastr.info(`Message Arrived: ${message.destinationName}: ${message.payloadString}`)
 
+    // setReading = {
+    //  "topic_1": function(msg) { ... },
+    //  "topic_2": function(msg) { ... }
+    // }
+
     if (setReading[message.destinationName] != null) {
       setReading[message.destinationName](message.payloadString)
     }
@@ -66,6 +72,9 @@
     toastr.info(`Message Sent: ${message.payloadString}`)
   }
 
+
+
+  // How to publish a message
   document.getElementById("btnHello").onclick = function () {
     message = new Paho.MQTT.Message("Hello")
     message.destinationName = "general"

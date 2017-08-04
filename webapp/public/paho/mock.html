@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>MQTT Demo - Mock IoT Device</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Mock IoT Device</h1>
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            <h5>Temp</h5>
+          </div>
+          <div class="card-block">
+            <h2 id="temperatureReading"></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            <h5>Pressure</h5>
+          </div>
+          <div class="card-block">
+            <h2 id="pressureReading"></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            <h5>Humidity</h5>
+          </div>
+          <div class="card-block">
+            <h2 id="humidityReading"></h2>
+          </div>          
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col mt-3">
+        <h2 id="statusText"></h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card mt-3">
+          <div class="card-block">
+            <canvas id="myChart" style="width:100%;height:300px;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col mt-5">
+        <button class="btn btn-primary" id="btnHello">Say Hello</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 4 -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+  <!-- Charting library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+
+  <!-- Toastr -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+  <!-- This is the MQTT client library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
+
+  <!-- Page scripts -->
+  <script src="/paho/devicemock.js"></script>
+
+</body>
+<html>

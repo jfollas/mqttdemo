@@ -5,7 +5,7 @@ function start_mqtt()
   client:on("connect", start_polling)
   client:on("offline", stop_polling)
 
-  client:connect("192.168.43.244", 1883, 0, 0, mqtt_connected, mqtt_error)
+  client:connect("192.168.43.250", 1883, 0, 0, mqtt_connected, mqtt_error)
 end
 
 

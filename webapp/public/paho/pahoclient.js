@@ -30,6 +30,7 @@
   function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
     toastr.success("onConnect")
+    
     client.subscribe("general")
     client.subscribe("status/+")
     client.subscribe("readings/+")
@@ -58,12 +59,16 @@
     //  "topic_2": function(msg) { ... }
     // }
 
-    if (setReading[message.destinationName] != null) {
-      setReading[message.destinationName](message.payloadString)
+    let topic = message.destinationName
+
+    // Sensor Data
+    if (setReading[topic] != null) {
+      setReading[topic](message.payloadString)
     }
 
-    if (setStatus[message.destinationName] != null) {
-      setStatus[message.destinationName](message.payloadString)
+    // Online/Offline
+    if (setStatus[topic] != null) {
+      setStatus[topic](message.payloadString)
     }
   }
 
